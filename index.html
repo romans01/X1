@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirXonix Lite 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="ui-overlay">
+        <div class="stats">
+            <div class="stats-group">
+                <div>Сетка: 
+                    <select id="grid-size-select" style="background: #222; color: #fff; border: 1px solid #00aaff;">
+                        <option value="30">30x30</option>
+                        <option value="40">40x40</option>
+                        <option value="50" selected>50x50</option>
+                        <option value="60">60x60</option>
+                    </select>
+                </div>
+                <div>Уровень: <span id="level-val">1</span></div>
+                <div>Захвачено: <span id="percent-val">0</span>%</div>
+                <div>Жизни: <span id="lives-val">3</span></div>
+                <div>Время: <span id="timer-val">00:00</span></div>
+            </div>
+            <div class="stats-group secondary">
+                <div>Повороты: <span id="turns-val">0</span></div>
+                <div>Реакция: <span id="reaction-val">0.00</span>с</div>
+                <div>Дистанция: <span id="distance-val">0</span>м</div>
+                <div>Риск: <span id="risk-val">0</span>%</div>
+            </div>
+        </div>
+        <div id="message" class="hidden">
+            <h1 id="message-text"></h1>
+            <div id="detailed-stats" class="detailed-stats">
+                <!-- Статистика будет вставлена здесь -->
+            </div>
+            <button id="restart-btn">Начать заново</button>
+        </div>
+    </div>
+    <div id="game-container"></div>
+
+    <!-- Библиотека Three.js -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="game.js"></script>
+</body>
+</html>
+

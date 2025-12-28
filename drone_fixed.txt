@@ -1,0 +1,44 @@
+class Drone {
+    constructor(scene) {
+        this.x = 0;
+        this.z = 0;
+        this.vx = 0;
+        this.vz = 0;
+        this.lastX = -1;
+        this.lastZ = -1;
+        this.speed = 0.15;
+        
+        const geometry = new THREE.SphereGeometry(0.4, 16, 16);
+        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0x444444 });
+        this.mesh = new THREE.Mesh(geometry, material);
+        scene.add(this.mesh);
+
+        // Свет от дрона
+        this.light = new THREE.PointLight(0x00ffff, 1, 5);
+        scene.add(this.light);
+    }
+
+    update(grid) {
+        const nextX = this.x + this.vx;
+        const nextZ = this.z + this.vz;
+
+        // Ограничение границами поля
+        if (nextX >= 0 && nextX < GRID_SIZE && nextZ >= 0 && nextZ < GRID_SIZE) {
+            this.x = nextX;
+            this.z = nextZ;
+        }
+
+        this.mesh.position.set(this.x - GRID_SIZE / 2 + 0.5, 0.5, this.z - GRID_SIZE / 2 + 0.5);
+        this.light.position.copy(this.mesh.position);
+    }
+
+    reset(x, z) {
+        this.x = x;
+        this.z = z;
+        this.vx = 0;
+        this.vz = 0;
+        this.lastX = Math.floor(x);
+        this.lastZ = Math.floor(z);
+    }
+}
+
